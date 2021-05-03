@@ -10,14 +10,7 @@
         $Title,
         [Parameter(Position=3)]
         [String]
-        $Destination,
-        [Parameter()]
-        [ValidateScript({if([System.IO.Path]::GetExtension($_) -eq "json"){$true}else{$false}})]
-        [String]
-        $EncodingProfile,
-        [Parameter()]
-        [switch]
-        $UploadToPlex
+        $Destination
 
     )
     # If the destination parameter isn't provided, create the new file in the same directory as the source
@@ -28,12 +21,6 @@
     <# Constants #>
         # Path to Handbrake CLI executable
         [String]$HANDBRAKE_CLI = "$env:ProgramFiles\HandbrakeCLI\HandbrakeCLI.exe"
-
-        # Path to default encoding profile
-        #[String]$HANDBRAKE_DEFAULT_PROFILE = "C:\Users\prboy\OneDrive\Documents\Torrenting\Handbrake-AMD_H264_MP4.json"
-
-    # Create a new Credential object
-    [pscredential]$Credential = New-Object pscredential "prboyer", $(Get-Content "C:\Users\prboy\OneDrive\Documents\Torrenting\Cred.txt" | ConvertTo-SecureString -Force)
 
     # Check if the file is already an MP4. If yes, then don't run through Handbrake
     if ([System.IO.Path]::GetExtension($File) -notlike "mp4") {
@@ -56,16 +43,4 @@
         }
     }else{
         Write-Host "File is already an MP4" -ForegroundColor Yellow
-    }
-
-    # Wait for the converstion job to complete before proceeding
-    Wait-Job -Job $ConversionJob
-
-    # Copy the file to Plex if the switch is supplied
-    if ($UploadToPlex) {
-        Write-Host "Move files to Media Server" -ForegroundColor Cyan
-        
-        New-PSDrive -Name "P" -PSProvider FileSystem -Root "\\192.168.1.100\Plex\Media" -Description "Plex Media Server on PRB-FS-1" -Credential $Credential
-
-        Copy-Item $DESTINATION\TV -Recurse -Filter {$_ -like "*.mp4"} 
     }
