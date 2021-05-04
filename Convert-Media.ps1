@@ -16,7 +16,7 @@
     }
 
     # Make sure to expand the paths
-    $FilePath = Resolve-Path -Path $FilePath
+    #$FilePath = Resolve-Path -Path $FilePath
     $Destination = Resolve-Path -Path $Destination
 
     <# Constants #>
