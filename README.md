@@ -13,7 +13,7 @@ Script to automate the process of transcoding video files.
 ## SYNTAX
 
 ```
-Convert-Media [[-FilePath] <String>] [[-Destination] <String>] [-Quiet] [<CommonParameters>]
+Convert-Media [-FilePath] <String> [-Destination] <String> [-Quiet] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +49,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -65,7 +65,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 2
 Default value: None
 Accept pipeline input: False
@@ -92,12 +92,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-Non .MP4 video files
+### Non .MP4 video files
 ## OUTPUTS
 
-A transcoded .MP4 video file
+### A transcoded .MP4 video file
 ## NOTES
 Author: Paul Boyer
-
 Date: 5-4-2021
+
 ## RELATED LINKS
