@@ -1,3 +1,30 @@
+    <#
+    .SYNOPSIS
+        Script to automate the process of transcoding video files.
+    .DESCRIPTION
+        The script is designed to be called from another program, passing both the full path of the content to be converted
+        as well as the destination for the transcoded output on the command line. The script leverages the Handbrake CLI to perform background
+        encoding jobs. The default hard-coded preset is optimized for H265 using AMD VCE drivers for hardware (GPU) encoding.
+    .Parameter FilePath
+        This should be the fully qualified path to the imput file.
+    .Parameter Destination
+        This is the path the the output directory. It does not need to be fully qualified. 
+    .Parameter Quiet
+        Specifying the quiet parameter will prevent the script from showing the progress of the conversion in a console window. 
+    .EXAMPLE
+        PS C:\> Powershell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -File .\Convert-Media.ps1 -FilePath ".\movie.wmv" -Destination ".\Folder\"
+        Typical use on the command line using relative paths
+    .EXAMPLE
+        Powershell.exe -NoProfile -NoLogo -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Convert-Media.ps1" -FilePath "%F" -Destination "G:\"
+        Example calling the script from another program like qBittorrent
+    .INPUTS
+        Non .MP4 video files
+    .OUTPUTS
+        A transcoded .MP4 video file
+    .NOTES
+        Author: Paul Boyer
+        Date: 5-4-2021
+    #>
     param (
         [Parameter(Position=0)]
         [String]
@@ -15,8 +42,7 @@
         $Destination = $(Split-Path -Path $FilePath -Parent);
     }
 
-    # Make sure to expand the paths
-    #$FilePath = Resolve-Path -Path $FilePath
+    # Make sure to expand the path
     $Destination = Resolve-Path -Path $Destination
 
     <# Constants #>
