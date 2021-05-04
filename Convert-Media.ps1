@@ -26,10 +26,10 @@
         Date: 5-4-2021
     #>
     param (
-        [Parameter(Position=0)]
+        [Parameter(Position=0,Mandatory=$true)]
         [String]
         $FilePath,
-        [Parameter(Position=1)]
+        [Parameter(Position=1,Mandatory=$true)]
         [String]
         $Destination,
         [Parameter()]
