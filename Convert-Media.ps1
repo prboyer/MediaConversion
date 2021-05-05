@@ -51,7 +51,7 @@
 
     # Check if the file is already an MP4. If yes, then don't run through Handbrake
     if ([System.IO.Path]::GetExtension($FilePath) -notlike "mp4") {
-        Write-Information ("Calling Handbrake for Converstion - {0}" -f $FilePath) -InformationAction Continue
+        Write-Information ("`nCalling Handbrake for Converstion - {0}" -f $FilePath) -InformationAction Continue
 
         $ConversionJob = Start-Job -Name $("Handbrake Conversion Job - {0}" -f $(Split-Path -Path $FilePath -Leaf)) -ArgumentList $HANDBRAKE_CLI, $FilePath, $Destination -ScriptBlock {
             try{
@@ -80,5 +80,5 @@
         Write-Host "File is already an MP4" -ForegroundColor Yellow
     }
 
-    Wait-Job -Job $ConversionJob
-    Receive-Job -Job $ConversionJob
+    # Wait-Job -Job $ConversionJob
+    # Receive-Job -Job $ConversionJob
