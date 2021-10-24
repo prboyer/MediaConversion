@@ -1,0 +1,10 @@
+{
+    "Handbrake":{
+        "CLI": "C:\\Program Files\\HandbrakeCLI\\HandBrakeCLI.exe",
+        "Conversion":{
+            "Format":"av_mp4",
+            "Encoder":"vce_h265",
+            "Preset":"H.265 MKV 2160p60"
+        }
+    }
+}
